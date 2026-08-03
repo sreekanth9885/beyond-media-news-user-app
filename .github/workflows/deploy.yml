@@ -1,0 +1,25 @@
+name: Deploy Beyond Media News User App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1.2.5
+
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+
+          script: |
+            cd /docker/beyond-media-news-user-app
+            chmod +x deploy.sh
+            ./deploy.sh
