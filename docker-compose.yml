@@ -1,0 +1,24 @@
+services:
+  news:
+    build: .
+    container_name: beyond-media-news
+
+    restart: unless-stopped
+
+    labels:
+      - "traefik.enable=true"
+
+      - "traefik.http.routers.news.rule=Host(`user.dinnusmart.com`)"
+
+      - "traefik.http.routers.news.entrypoints=websecure"
+
+      - "traefik.http.routers.news.tls.certresolver=letsencrypt"
+
+      - "traefik.http.services.news.loadbalancer.server.port=3000"
+
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    external: true
