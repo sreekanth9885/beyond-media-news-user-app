@@ -1,10 +1,20 @@
-import Image from "next/image";
+import NewsCard from "./components/news/NewsCard";
+import { getLatestNews } from "./services/news";
 
-export default function Home() {
+export default async function HomePage() {
+  const response = await getLatestNews();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <h1>Welcome to Beyond Media News User App</h1>
-      <h1>See All News here</h1>
-    </div>
+    <main className="mx-auto max-w-7xl p-6">
+      <h1 className="mb-8 text-3xl font-bold">
+        Latest News
+      </h1>
+
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {response.data.map((news) => (
+          <NewsCard key={news.id} news={news} />
+        ))}
+      </div>
+    </main>
   );
 }
