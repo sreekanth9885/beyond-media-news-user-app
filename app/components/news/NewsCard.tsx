@@ -8,7 +8,7 @@ interface Props {
 
 export default function NewsCard({ news }: Props) {
   return (
-    <Link href={`/news/${news.slug}`}>
+      <Link href={`/news/${news.youtube_url}`}>
       <article className="overflow-hidden rounded-xl border bg-white shadow-sm transition hover:shadow-lg">
         <div className="relative h-56 w-full">
           <Image
