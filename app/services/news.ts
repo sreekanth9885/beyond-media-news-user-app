@@ -1,28 +1,31 @@
-import { fetchApi } from "./api";
-
-export interface News {
-  id: number;
-  title: string;
-  slug: string;
-  category_id: number;
-  sub_category_id: number;
-  tags: string | null;
-  youtube_url: string | null;
-  short_description: string;
-  content: string;
-  featured_image: string;
-  status: string;
-  created_at: string;
-  updated_at: string;
-  category_name: string;
-  sub_category_name: string;
-}
-
-interface NewsResponse {
-  success: boolean;
-  data: News[];
-}
+import { ApiResponse, News } from "@/app/types/news";
 
 export async function getLatestNews() {
-  return fetchApi<NewsResponse>("/news");
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/news`, {
+    next: {
+      revalidate: 60,
+    },
+  });
+
+  const result: ApiResponse<News[]> = await response.json();
+
+  return result.data;
+}
+export async function getNewsBySlug(slug: string): Promise<News> {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/news/${slug}`,
+    {
+      next: {
+        revalidate: 60,
+      },
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch news");
+  }
+
+  const result: ApiResponse<News> = await response.json();
+
+  return result.data;
 }

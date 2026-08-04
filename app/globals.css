@@ -1,22 +1,64 @@
 @import "tailwindcss";
 
+/* ===========================
+   Theme Variables
+=========================== */
+
 :root {
+  /* Brand */
+  --primary: #d71920;
+  --primary-hover: #b9141a;
+
+  /* Base */
   --background: #ffffff;
-  --foreground: #171717;
+  --surface: #f8fafc;
+
+  /* Text */
+  --foreground: #111827;
+  --muted: #6b7280;
+
+  /* Border */
+  --border: #e5e7eb;
+
+  /* Status */
+  --success: #16a34a;
+  --warning: #f59e0b;
+  --danger: #dc2626;
+
+  /* Radius */
+  --radius: 12px;
 }
 
-@theme inline {
+/* ===========================
+   Tailwind Theme
+=========================== */
+
+@theme {
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+
   --color-background: var(--background);
+  --color-surface: var(--surface);
+
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+
+  --color-border: var(--border);
+
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+
+  --radius-default: var(--radius);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ===========================
+   Base
+=========================== */
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {

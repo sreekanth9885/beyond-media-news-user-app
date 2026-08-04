@@ -1,38 +1,43 @@
 import Image from "next/image";
 import Link from "next/link";
-import { News } from "@/app/services/news";
+
+import { News } from "@/app/types/news";
+import { imageUrl } from "@/app/utils/image";
 
 interface Props {
   news: News;
 }
 
-export default function NewsCard({ news }: Props) {
+export default function NewsCard({
+  news,
+}: Props) {
   return (
-      <Link href={`/news/${news.youtube_url}`}>
-      <article className="overflow-hidden rounded-xl border bg-white shadow-sm transition hover:shadow-lg">
-        <div className="relative h-56 w-full">
-          <Image
-            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${news.featured_image}`}
-            alt={news.title}
-            fill
-            className="object-cover"
-          />
-        </div>
+    <article className="overflow-hidden rounded-xl border border-border bg-white shadow-sm transition hover:shadow-lg">
+      <Link href={`/news/${news.slug}`}>
+        <Image
+          src={imageUrl(news.featured_image)}
+          alt={news.title}
+          width={600}
+          height={350}
+          className="h-60 w-full object-cover"
+        />
+      </Link>
 
-        <div className="p-4">
-          <span className="text-sm font-semibold text-red-600">
-            {news.category_name}
-          </span>
+      <div className="space-y-3 p-5">
+        <span className="text-sm font-semibold text-primary">
+          {news.category_name}
+        </span>
 
-          <h2 className="mt-2 text-xl font-bold line-clamp-2">
+        <Link href={`/news/${news.slug}`}>
+          <h3 className="line-clamp-2 text-xl font-bold hover:text-primary">
             {news.title}
-          </h2>
+          </h3>
+        </Link>
 
-          <p className="mt-3 text-gray-600 line-clamp-3">
-            {news.short_description}
-          </p>
-        </div>
-      </article>
-    </Link>
+        <p className="line-clamp-3 text-muted">
+          {news.short_description}
+        </p>
+      </div>
+    </article>
   );
 }

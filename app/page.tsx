@@ -1,20 +1,29 @@
+import SiteHeader from "./components/navigation/SiteHeader";
 import NewsCard from "./components/news/NewsCard";
+import Main from "./components/ui/layout/Main";
 import { getLatestNews } from "./services/news";
 
-export default async function HomePage() {
-  const response = await getLatestNews();
 
+export default async function Home() {
+  const news = await getLatestNews();
   return (
-    <main className="mx-auto max-w-7xl p-6">
-      <h1 className="mb-8 text-3xl font-bold">
-        Latest News
-      </h1>
+    <>
+      <SiteHeader />
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {response.data.map((news) => (
-          <NewsCard key={news.id} news={news} />
-        ))}
-      </div>
-    </main>
+      <main className="mx-auto max-w-screen-xl p-5">
+
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+          {news.map(item => (
+            <NewsCard
+              key={item.id}
+              news={item}
+            />
+          ))}
+
+        </div>
+
+      </main>
+    </>
   );
 }
