@@ -26,7 +26,7 @@ export default async function NewsDetailsPage({
         className="mb-6 rounded-xl object-cover"
       />
 
-      <span className="text-primary font-semibold">
+      <span className="font-semibold text-primary">
         {news.category_name}
       </span>
 
