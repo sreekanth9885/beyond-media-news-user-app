@@ -15,7 +15,7 @@ export default function Header() {
           {/* Advertisement */}
           <div className="flex justify-center lg:justify-end">
             <div className="flex h-[90px] w-full max-w-[728px] items-center justify-center rounded-lg border bg-gray-100 text-sm text-gray-500">
-              728 × 90 Advertisement comes here
+              728 × 90 Advertisement comes here in featured section of the website. You can use any ad network or custom ads.
             </div>
           </div>
 
