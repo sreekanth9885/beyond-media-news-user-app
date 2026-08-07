@@ -1,49 +1,56 @@
 import SiteHeader from "./components/navigation/SiteHeader";
 import AdvertisementInline from "./components/advertisement/AdvertisementInline";
-
-import HeroSection from "./components/home/HeroSection";
 import BreakingNews from "./components/home/BreakingNews";
+import HeroSection from "./components/home/HeroSection";
+import LatestNews from "./components/home/LatestNews";
+import HomeCategorySections from "./components/home/HomeCategorySections";
 
 import { getHome } from "./services/home";
-import LatestNews from "./components/home/LatestNews";
+import { getCategories } from "./services/category";
 
 export default async function Home() {
-  const home = await getHome();
+  const [home, categories] = await Promise.all([
+    getHome(),
+    getCategories(),
+  ]);
 
   return (
     <>
-      <SiteHeader />
+      <SiteHeader categories={categories} />
 
       <main className="mx-auto max-w-screen-xl space-y-10 p-5">
-
-        {home.advertisements.homepage_top[0] && (
+        {/* Top Advertisement */}
+        {home.advertisements.homepage_top?.[0] && (
           <AdvertisementInline
             advertisement={home.advertisements.homepage_top[0]}
           />
         )}
 
-        <HeroSection news={home.hero} />
-
+        {/* Breaking News */}
         <BreakingNews news={home.breaking} />
 
-        {home.advertisements.homepage_middle[0] && (
+        {/* Hero */}
+        <HeroSection news={home.hero} />
+
+        {/* Middle Advertisement */}
+        {home.advertisements.homepage_middle?.[0] && (
           <AdvertisementInline
             advertisement={home.advertisements.homepage_middle[0]}
           />
         )}
 
+        {/* Latest News */}
         <LatestNews news={home.latest} />
 
-        {/* <CategorySections
-          categories={home.categories}
-        /> */}
+        {/* Dynamic Category Sections */}
+        <HomeCategorySections categories={categories} />
 
-        {home.advertisements.homepage_bottom[0] && (
+        {/* Bottom Advertisement */}
+        {home.advertisements.homepage_bottom?.[0] && (
           <AdvertisementInline
             advertisement={home.advertisements.homepage_bottom[0]}
           />
         )}
-
       </main>
     </>
   );

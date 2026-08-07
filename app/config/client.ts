@@ -3,7 +3,7 @@ export const clientConfig = {
 
   siteUrl: "https://beyondmedia.com",
 
-  logo: "/logo.svg",
+  logo: "/clogo.png",
 
   favicon: "/favicon.ico",
 
