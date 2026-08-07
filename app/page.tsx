@@ -1,4 +1,3 @@
-import SiteHeader from "./components/navigation/SiteHeader";
 import AdvertisementInline from "./components/advertisement/AdvertisementInline";
 import BreakingNews from "./components/home/BreakingNews";
 import HeroSection from "./components/home/HeroSection";
@@ -16,7 +15,6 @@ export default async function Home() {
 
   return (
     <>
-      <SiteHeader categories={categories} />
 
       <main className="mx-auto max-w-screen-xl space-y-10 p-5">
         {/* Top Advertisement */}
