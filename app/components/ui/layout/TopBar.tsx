@@ -6,26 +6,22 @@ import Container from "./Container";
 
 export default function TopBar() {
   return (
-    <div>
+    <div className="border-b">
       <Container>
+        <div className="flex items-center justify-between gap-3 py-2">
 
-        <div className="flex items-center justify-between">
-
-          <div>
-            {format(
-              new Date(),
-              "EEEE, dd MMMM yyyy"
-            )}
+          {/* Date */}
+          <div className="min-w-0 truncate text-xs sm:text-sm">
+            {format(new Date(), "EEEE, dd MMMM yyyy")}
           </div>
 
-          <div className="flex items-center gap-3">
+          {/* Social + Search */}
+          <div className="flex shrink-0 items-center gap-2">
             <SocialLinks />
-
             <SearchButton />
           </div>
 
         </div>
-
       </Container>
     </div>
   );

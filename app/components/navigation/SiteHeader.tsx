@@ -10,16 +10,16 @@ export default async function SiteHeader() {
 
   return (
     <>
-      <>
-        {/* Desktop TopBar + Header */}
-        <div className="hidden md:block">
-          <TopBar />
-          <Header />
-        </div>
+      {/* TopBar - Mobile + Desktop */}
+      <TopBar />
 
-        {/* Navbar - Mobile + Desktop */}
+      {/* Header - Desktop */}
+      <div className="hidden md:block">
+        <Header />
+      </div>
+
+      {/* Navbar - Mobile + Desktop */}
       <Navbar categories={categories} />
-    </>
     </>
   );
 }
