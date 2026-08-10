@@ -171,7 +171,7 @@ export default function Footer() {
               </p>
 
               <p>
-                Phone: +91 XXXXX XXXXX
+                Phone: +91 9010079111
               </p>
 
             </div>
