@@ -1,5 +1,7 @@
 // services/news.ts
 
+import { getHome } from "./home";
+
 export async function getNewsBySlug(slug: string) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/news/details/${slug}`,
@@ -17,4 +19,15 @@ export async function getNewsBySlug(slug: string) {
   const result = await response.json();
   console.log("result", result);
   return result.data.news;
+}
+export async function getLatestNews() {
+  const home = await getHome();
+
+  return home.latest;
+}
+
+export async function getTrendingNews() {
+  const home = await getHome();
+
+  return home.trending;
 }

@@ -5,6 +5,7 @@ import "./globals.css";
 import ThemeProvider from "./theme/ThemeProvider";
 
 import SiteHeader from "./components/navigation/SiteHeader";
+import Footer from "./components/ui/layout/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,8 +35,8 @@ export default function RootLayout({
       <body className="min-h-screen bg-white">
         <ThemeProvider>
           <SiteHeader />
-
           {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

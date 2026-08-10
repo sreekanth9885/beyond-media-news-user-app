@@ -8,25 +8,51 @@ interface Props {
   news: News;
 }
 
-export default function NewsCard({
-  news,
-}: Props) {
+export default function NewsCard({ news }: Props) {
   return (
-    <article className="overflow-hidden rounded-xl border border-border bg-white shadow-sm transition hover:shadow-lg">
-      <Link href={`/news/${news.slug}`}>
-        <Image
-          src={imageUrl(news.featured_image)}
-          alt={news.title}
-          width={600}
-          height={350}
-          className="h-60 w-full object-cover"
-        />
-      </Link>
+    <article className="group overflow-hidden rounded-xl border bg-background transition hover:-translate-y-1 hover:shadow-lg">
 
-      <div className="space-y-3 p-5">
-        <span className="text-sm font-semibold text-primary">
+      {/* Image */}
+      <div className="relative aspect-[16/10] overflow-hidden">
+        <Link href={`/news/${news.slug}`}>
+          <Image
+            src={imageUrl(news.featured_image)}
+            alt={news.title}
+            fill
+            className="object-cover transition duration-300 group-hover:scale-130"
+          />
+        </Link>
+
+        {/* Category */}
+        <span className="absolute left-3 top-3 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-white">
           {news.category_name}
         </span>
+
+        {/* YouTube */}
+        {news.youtube_url && (
+          <a
+            href={news.youtube_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Watch on YouTube"
+            className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-red-600 px-3 py-1.5 text-xs font-semibold text-white shadow-md transition hover:bg-red-700"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="h-4 w-4"
+            >
+              <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z" />
+            </svg>
+
+            Watch
+          </a>
+        )}
+      </div>
+
+      {/* Content */}
+      <div className="space-y-3 p-5">
 
         <Link href={`/news/${news.slug}`}>
           <h3 className="line-clamp-2 text-xl font-bold hover:text-primary">
@@ -37,6 +63,7 @@ export default function NewsCard({
         <p className="line-clamp-3 text-muted">
           {news.short_description}
         </p>
+
       </div>
     </article>
   );
