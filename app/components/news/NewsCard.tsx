@@ -10,23 +10,26 @@ interface Props {
 
 export default function NewsCard({ news }: Props) {
   return (
-    <article className="group overflow-hidden rounded-xl border bg-background transition hover:-translate-y-1 hover:shadow-lg">
+    <article className="group overflow-hidden rounded-xl border bg-background shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
 
       {/* Image */}
       <div className="relative aspect-[16/10] overflow-hidden">
+
         <Link href={`/news/${news.slug}`}>
           <Image
             src={imageUrl(news.featured_image)}
             alt={news.title}
             fill
-            className="object-cover transition duration-300 group-hover:scale-130"
+            className="object-cover transition duration-300 group-hover:scale-110"
           />
         </Link>
 
         {/* Category */}
-        <span className="absolute left-3 top-3 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-white">
-          {news.category_name}
-        </span>
+        {news.category_name && (
+          <span className="absolute left-3 top-3 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-white">
+            {news.category_name}
+          </span>
+        )}
 
         {/* YouTube */}
         {news.youtube_url && (
@@ -49,13 +52,14 @@ export default function NewsCard({ news }: Props) {
             Watch
           </a>
         )}
+
       </div>
 
       {/* Content */}
       <div className="space-y-3 p-5">
 
         <Link href={`/news/${news.slug}`}>
-          <h3 className="line-clamp-2 text-xl font-bold hover:text-primary">
+          <h3 className="line-clamp-2 text-xl font-bold transition hover:text-primary">
             {news.title}
           </h3>
         </Link>
@@ -65,6 +69,7 @@ export default function NewsCard({ news }: Props) {
         </p>
 
       </div>
+
     </article>
   );
 }

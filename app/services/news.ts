@@ -1,5 +1,6 @@
 // services/news.ts
 
+import { News, SearchResponse } from "../types/news";
 import { getHome } from "./home";
 
 export async function getNewsBySlug(slug: string) {
@@ -30,4 +31,23 @@ export async function getTrendingNews() {
   const home = await getHome();
 
   return home.trending;
+}
+
+export async function searchNews(query: string): Promise<News[]> {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/news?search=${encodeURIComponent(query)}&status=published&limit=20`,
+    {
+      next: {
+        revalidate: 30,
+      },
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to search news");
+  }
+
+  const result: SearchResponse = await response.json();
+
+  return result.data;
 }

@@ -13,7 +13,7 @@ const socialLinks = [
   },
   {
     icon: FaTwitter,
-    href: "#",
+    href: "https://x.com/BeyondIMedia",
   },
   {
     icon: FaInstagram,
@@ -21,7 +21,7 @@ const socialLinks = [
   },
   {
     icon: FaYoutube,
-    href: "#",
+    href: "https://www.youtube.com/@BeyondPolitics9",
   },
 ];
 
