@@ -14,7 +14,9 @@ export default async function SiteHeader() {
       <TopBar />
 
       {/* Header - Desktop */}
-      <div className="hidden md:block">
+      {/* <div className="hidden md:block">
+       */}
+      <div>
         <Header />
       </div>
 
