@@ -11,7 +11,6 @@ export default function Header() {
           <div className="flex-shrink-0">
             <Logo />
           </div>
-
           {/* Advertisement */}
           <div className="flex justify-center lg:justify-end">
             <div className="flex h-[90px] w-full max-w-[728px] items-center justify-center rounded-lg border bg-gray-100 text-sm text-gray-500">

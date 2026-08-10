@@ -25,6 +25,9 @@ export default async function Home() {
         )}
 
         {/* Breaking News */}
+        <span className="font-bold whitespace-nowrap bg-red-600 text-white px-2 py-1 rounded">
+          BREAKING NEWS
+        </span>
         <BreakingNews news={home.breaking} />
 
         {/* Hero */}
