@@ -18,11 +18,7 @@ export default async function Home() {
 
       <main className="mx-auto max-w-screen-xl space-y-10 p-5">
         {/* Top Advertisement */}
-        {home.advertisements.homepage_top?.[0] && (
-          <AdvertisementInline
-            advertisement={home.advertisements.homepage_top[0]}
-          />
-        )}
+
 
         {/* Breaking News */}
         <span className="font-bold whitespace-nowrap bg-red-600 text-white px-2 py-1 rounded">
@@ -32,7 +28,11 @@ export default async function Home() {
 
         {/* Hero */}
         <HeroSection news={home.hero} />
-
+        {home.advertisements.homepage_top?.[0] && (
+          <AdvertisementInline
+            advertisement={home.advertisements.homepage_top[0]}
+          />
+        )}
         {/* Middle Advertisement */}
         {home.advertisements.homepage_middle?.[0] && (
           <AdvertisementInline
