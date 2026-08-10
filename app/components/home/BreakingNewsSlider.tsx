@@ -50,9 +50,9 @@ export default function BreakingNewsSlider({
 
   return (
     <div className="flex items-center gap-2 py-2">
-      <span className="font-bold whitespace-nowrap bg-red-600 text-white px-2 py-1 rounded">
+      {/* <span className="font-bold whitespace-nowrap bg-red-600 text-white px-2 py-1 rounded">
         BREAKING NEWS
-      </span>
+      </span> */}
       {canMove && (
         <button
           type="button"
