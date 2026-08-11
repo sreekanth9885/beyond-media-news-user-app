@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef } from "react";
 import Link from "next/link";
 import {
   ChevronLeft,
@@ -17,95 +17,103 @@ interface Props {
   news: NewsItem[];
 }
 
-const DESKTOP_VISIBLE = 5;
-const MOBILE_VISIBLE = 2;
-
-export default function BreakingNewsSlider({
-  news,
-}: Props) {
-  const [startIndex, setStartIndex] = useState(0);
+export default function BreakingNewsSlider({ news }: Props) {
+  const trackRef = useRef<HTMLDivElement>(null);
 
   if (!news.length) return null;
 
-  const canMove = news.length > DESKTOP_VISIBLE;
+  // Duplicate items for seamless infinite scrolling
+  const scrollingNews = [...news, ...news];
 
-  const handlePrevious = () => {
-    setStartIndex((prev) =>
-      prev === 0 ? news.length - DESKTOP_VISIBLE : prev - 1
-    );
+  const scrollLeft = () => {
+    trackRef.current?.scrollBy({
+      left: -250,
+      behavior: "smooth",
+    });
   };
 
-  const handleNext = () => {
-    setStartIndex((prev) =>
-      prev >= news.length - DESKTOP_VISIBLE
-        ? 0
-        : prev + 1
-    );
+  const scrollRight = () => {
+    trackRef.current?.scrollBy({
+      left: 250,
+      behavior: "smooth",
+    });
   };
-
-  const visibleNews = news.slice(
-    startIndex,
-    startIndex + DESKTOP_VISIBLE
-  );
 
   return (
-    <div className="flex items-center gap-2 py-2">
-      {/* <span className="font-bold whitespace-nowrap bg-red-600 text-white px-2 py-1 rounded">
-        BREAKING NEWS
-      </span> */}
-      {canMove && (
-        <button
-          type="button"
-          onClick={handlePrevious}
-          aria-label="Previous breaking news"
-          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/50 bg-white/10 text-white transition hover:bg-white/20"
-        >
-          <ChevronLeft size={18} />
-        </button>
-      )}
+    <div className="relative overflow-hidden py-2">
+      {/* Left Chevron */}
+      <button
+        type="button"
+        onClick={scrollLeft}
+        aria-label="Previous breaking news"
+        className="absolute left-0 top-1/2 z-20 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/40 bg-red-600/90 text-white shadow-md transition hover:bg-red-700"
+      >
+        <ChevronLeft size={18} />
+      </button>
 
-      {/* Desktop */}
-      <div className="hidden min-w-0 flex-1 gap-4 md:grid md:grid-cols-5">
-        {visibleNews.map((item) => (
-          <Link
-            key={item.id}
-            href={`/news/${item.slug}`}
-            className="min-w-0 border-r border-white/20 pr-4 text-sm text-white last:border-0 hover:underline"
-          >
-            <span className="block truncate">
-              {item.title}
-            </span>
-          </Link>
-        ))}
+      {/* Right Chevron */}
+      <button
+        type="button"
+        onClick={scrollRight}
+        aria-label="Next breaking news"
+        className="absolute right-0 top-1/2 z-20 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/40 bg-red-600/90 text-white shadow-md transition hover:bg-red-700"
+      >
+        <ChevronRight size={18} />
+      </button>
+
+      {/* Scrolling area */}
+      <div
+        ref={trackRef}
+        className="breaking-news-scroll overflow-hidden"
+      >
+        <div className="breaking-news-track flex w-max items-center">
+          {scrollingNews.map((item, index) => (
+            <Link
+              key={`${item.id}-${index}`}
+              href={`/news/${item.slug}`}
+              className="
+                flex
+                w-[180px]
+                shrink-0
+                items-center
+                border-r
+                border-white/25
+                px-4
+                text-sm
+                text-white
+                hover:underline
+                md:w-[16.6667vw]
+                lg:w-[180px]
+                xl:w-[200px]
+              "
+            >
+              <span className="block truncate">
+                {item.title}
+              </span>
+            </Link>
+          ))}
+        </div>
       </div>
 
-      {/* Mobile */}
-      <div className="grid min-w-0 flex-1 grid-cols-2 gap-3 md:hidden">
-        {visibleNews.slice(0, MOBILE_VISIBLE).map((item) => (
-          <Link
-            key={item.id}
-            href={`/news/${item.slug}`}
-            className="min-w-0 border-r border-white/20 pr-3 text-sm text-white last:border-0 hover:underline"
-          >
-            <span className="block truncate">
-              {item.title}
-            </span>
-          </Link>
-        ))}
-      </div>
+      <style jsx>{`
+        .breaking-news-track {
+          animation: breaking-news-scroll 30s linear infinite;
+        }
 
-      {/* Next */}
-      {canMove && (
-        <button
-          type="button"
-          onClick={handleNext}
-          aria-label="Next breaking news"
-          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/50 bg-white/10 text-white transition hover:bg-white/20"
-        >
-          <ChevronRight size={18} />
-        </button>
-      )}
+        .breaking-news-scroll:hover .breaking-news-track {
+          animation-play-state: paused;
+        }
 
+        @keyframes breaking-news-scroll {
+          0% {
+            transform: translateX(0);
+          }
+
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+      `}</style>
     </div>
   );
 }
