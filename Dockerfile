@@ -1,4 +1,4 @@
-# Build stage
+# ---------- Build stage ----------
 FROM node:22-alpine AS builder
 
 WORKDIR /app
@@ -10,13 +10,16 @@ ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 ENV NEXT_PUBLIC_IMAGE_URL=$NEXT_PUBLIC_IMAGE_URL
 
 COPY package*.json ./
-RUN npm install
+
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci
 
 COPY . .
 
 RUN npm run build
 
-# Production stage
+
+# ---------- Production stage ----------
 FROM node:22-alpine
 
 WORKDIR /app
