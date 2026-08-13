@@ -87,9 +87,8 @@ export default async function NewsDetailsPage({ params }: Props) {
         </div>
 
         {/* ----- RIGHT COLUMN: Sidebar with Latest News ----- */}
-        <aside className="mt-10 lg:mt-0">
-          <LatestNews news={latestNews} />
-        </aside>
+
+        <LatestNews news={latestNews} />
       </div>
     </main>
   );
