@@ -8,51 +8,82 @@ import { getHome } from "./services/home";
 import { getCategories } from "./services/category";
 
 export default async function Home() {
-  const [home, categories] = await Promise.all([
-    getHome(),
-    getCategories(),
-  ]);
+  const [home, categories] = await Promise.all([getHome(), getCategories()]);
+
+  const leftAdvertisements = home.advertisements.homepage_left ?? [];
+
+  const rightAdvertisements = home.advertisements.homepage_right ?? [];
 
   return (
-    <>
+    <main className="mx-auto max-w-[1600px] px-5 py-10">
+      {/* Breaking News */}
+      <BreakingNews news={home.breaking} />
 
-      <main className="mx-auto max-w-screen-xl space-y-10 p-5">
-        {/* Top Advertisement */}
+      {/* 3 COLUMN LAYOUT */}
+      <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-[250px_minmax(0,1fr)_250px]">
+        {/* ================================= */}
+        {/* LEFT SIDEBAR */}
+        {/* ================================= */}
+        <aside className="hidden lg:block">
+          <div className="sticky top-24 space-y-6">
+            {leftAdvertisements.map((advertisement) => (
+              <AdvertisementInline
+                key={advertisement.id}
+                advertisement={advertisement}
+              />
+            ))}
+          </div>
+        </aside>
 
+        {/* ================================= */}
+        {/* MAIN CONTENT */}
+        {/* ================================= */}
+        <div className="min-w-0 space-y-10">
+          {/* Hero */}
+          <HeroSection news={home.hero} />
 
-        {/* Breaking News */}
-        {/* <span className="font-bold whitespace-nowrap bg-red-600 text-white px-2 py-1 rounded">
-          BREAKING NEWS
-        </span> */}
-        <BreakingNews news={home.breaking} />
+          {/* Top Advertisement */}
+          {home.advertisements.homepage_top?.[0] && (
+            <AdvertisementInline
+              advertisement={home.advertisements.homepage_top[0]}
+            />
+          )}
 
-        {/* Hero */}
-        <HeroSection news={home.hero} />
-        {home.advertisements.homepage_top?.[0] && (
-          <AdvertisementInline
-            advertisement={home.advertisements.homepage_top[0]}
-          />
-        )}
-        {/* Middle Advertisement */}
-        {home.advertisements.homepage_middle?.[0] && (
-          <AdvertisementInline
-            advertisement={home.advertisements.homepage_middle[0]}
-          />
-        )}
+          {/* Middle Advertisement */}
+          {home.advertisements.homepage_middle?.[0] && (
+            <AdvertisementInline
+              advertisement={home.advertisements.homepage_middle[0]}
+            />
+          )}
 
-        {/* Latest News */}
-        <LatestNews news={home.latest} />
+          {/* Latest News */}
+          <LatestNews news={home.latest} />
 
-        {/* Dynamic Category Sections */}
-        <HomeCategorySections categories={categories} />
+          {/* Categories */}
+          <HomeCategorySections categories={categories} />
 
-        {/* Bottom Advertisement */}
-        {home.advertisements.homepage_bottom?.[0] && (
-          <AdvertisementInline
-            advertisement={home.advertisements.homepage_bottom[0]}
-          />
-        )}
-      </main>
-    </>
+          {/* Bottom Advertisement */}
+          {home.advertisements.homepage_bottom?.[0] && (
+            <AdvertisementInline
+              advertisement={home.advertisements.homepage_bottom[0]}
+            />
+          )}
+        </div>
+
+        {/* ================================= */}
+        {/* RIGHT SIDEBAR */}
+        {/* ================================= */}
+        <aside className="hidden lg:block">
+          <div className="sticky top-24 space-y-6">
+            {rightAdvertisements.map((advertisement) => (
+              <AdvertisementInline
+                key={advertisement.id}
+                advertisement={advertisement}
+              />
+            ))}
+          </div>
+        </aside>
+      </div>
+    </main>
   );
 }

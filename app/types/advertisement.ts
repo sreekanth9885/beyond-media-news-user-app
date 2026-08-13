@@ -10,7 +10,8 @@ export interface AdvertisementGroup {
   homepage_top: Advertisement[];
   homepage_middle: Advertisement[];
   homepage_bottom: Advertisement[];
-
+  homepage_right: Advertisement[];
+  homepage_left: Advertisement[];
   sidebar_top: Advertisement[];
   sidebar_bottom: Advertisement[];
 
