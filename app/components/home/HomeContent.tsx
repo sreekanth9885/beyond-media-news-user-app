@@ -13,7 +13,7 @@ export default function HomeContent({ home }: Props) {
 
       <BreakingNews news={home.breaking} />
 
-      <LatestNews news={home.latest} />
+      <LatestNews news={home.latest} title="Latest News" />
     </>
   );
 }
