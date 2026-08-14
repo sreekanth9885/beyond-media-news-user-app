@@ -34,3 +34,17 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+The hero: gets featured news (is_featured=1) limited to 10, ordered by published_at DESC.
+
+breaking: gets is_breaking=1, limited to 10, ordered.
+
+latest: gets all published news limited to 8.
+
+trending: ordered by views DESC, limited to 8.
+
+advertisements: queries advertisements table, filters by active status and date range, then groups by position into an object.
+
+categories: queries active categories, then for each category, queries news for that category limited to 6, building categorySections array.
+
+sidebarLatest: separate query for latest news for sidebar, limited to 8.

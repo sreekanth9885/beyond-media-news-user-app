@@ -57,7 +57,7 @@ export default async function Home() {
           )}
 
           {/* Latest News */}
-          <LatestNews news={home.latest} />
+          <LatestNews news={home.latest} title="Latest News" />
 
           {/* Categories */}
           <HomeCategorySections categories={categories} />

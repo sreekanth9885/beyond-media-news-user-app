@@ -2,13 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { getNewsBySlug, getLatestNews } from "@/app/services/news";
-
 import { getHome } from "@/app/services/home";
-
 import { imageUrl } from "@/app/utils/image";
-
 import LatestNews from "@/app/components/home/LatestNews";
 import AdvertisementInline from "@/app/components/advertisement/AdvertisementInline";
+import TrendingPage from "@/app/trending/page";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -17,7 +15,6 @@ interface Props {
 export default async function NewsDetailsPage({ params }: Props) {
   const { slug } = await params;
 
-  // Fetch everything in parallel
   const [news, latestNews, home] = await Promise.all([
     getNewsBySlug(slug),
     getLatestNews(),
@@ -33,17 +30,18 @@ export default async function NewsDetailsPage({ params }: Props) {
   }
 
   const leftAdvertisements = home.advertisements.homepage_left ?? [];
+  // Right advertisements are no longer used – we show latest news instead.
 
-  const rightAdvertisements = home.advertisements.homepage_right ?? [];
+  // Limit to 9 items for a 3×3 grid (optional)
+  const latestForGrid = latestNews.slice(0, 9);
 
   return (
     <main className="mx-auto max-w-screen-2xl px-4 py-10">
-      {/* 3 COLUMN LAYOUT */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[250px_minmax(0,1fr)_250px]">
+      {/* 3 COLUMN LAYOUT – right column widened to 320px */}
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[250px_minmax(0,1fr)_320px]">
         {/* ================================= */}
         {/* LEFT ADVERTISEMENT */}
         {/* ================================= */}
-
         <aside className="hidden lg:block">
           <div className="sticky top-24">
             {leftAdvertisements.map((advertisement) => (
@@ -58,7 +56,6 @@ export default async function NewsDetailsPage({ params }: Props) {
         {/* ================================= */}
         {/* MAIN ARTICLE */}
         {/* ================================= */}
-
         <article className="min-w-0">
           {/* News Top Advertisement */}
           {home.advertisements.news_top?.[0] && (
@@ -139,6 +136,12 @@ export default async function NewsDetailsPage({ params }: Props) {
                   </span>
                 )}
               </p>
+              Views{" "}
+              {news.views && (
+                <span className="ml-2 text-xs text-muted-foreground">
+                  · {news.views}
+                </span>
+              )}
             </div>
           )}
 
@@ -150,39 +153,48 @@ export default async function NewsDetailsPage({ params }: Props) {
               />
             </div>
           )}
-
-          {/* ================================= */}
-          {/* LATEST NEWS */}
-          {/* ================================= */}
-
-          <section className="mt-10 border-t border-gray-200 pt-8">
-            <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
-              <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-                Latest News
-              </h2>
-
-              <div className="text-sm [&>div]:border-b [&>div]:border-gray-100 [&>div]:py-1.5 last:[&>div]:border-0">
-                <LatestNews news={latestNews} />
-              </div>
-            </div>
-          </section>
         </article>
 
         {/* ================================= */}
-        {/* RIGHT ADVERTISEMENT */}
+        {/* RIGHT SIDEBAR – LATEST NEWS GRID */}
         {/* ================================= */}
-
         <aside className="hidden lg:block">
-          <div className="sticky top-24 space-y-6">
-            {rightAdvertisements.map((advertisement) => (
-              <AdvertisementInline
-                key={advertisement.id}
-                advertisement={advertisement}
-              />
-            ))}
+          <div className="sticky top-24">
+            <div className="rounded-lg border border-gray-200 bg-white p-3 shadow-sm">
+              <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+                Latest News
+              </h2>
+              <div className="grid grid-cols-2 gap-2">
+                {latestForGrid.map((item) => (
+                  <Link
+                    key={item.id}
+                    href={`/news/${item.slug}`}
+                    className="group block overflow-hidden rounded border border-gray-100 transition hover:shadow-md"
+                  >
+                    {item.featured_image && (
+                      <div className="relative aspect-square overflow-hidden bg-gray-100">
+                        <Image
+                          src={imageUrl(item.featured_image)}
+                          alt={item.title}
+                          fill
+                          className="object-cover transition group-hover:scale-105"
+                          sizes="(max-width: 1024px) 33vw, 100px"
+                        />
+                      </div>
+                    )}
+                    <div className="p-1.5 text-center text-xs leading-tight">
+                      <span className="line-clamp-2 font-medium text-gray-800 group-hover:text-primary">
+                        {item.title}
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
         </aside>
       </div>
+      <TrendingPage />
     </main>
   );
 }

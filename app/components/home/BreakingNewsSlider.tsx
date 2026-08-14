@@ -2,10 +2,7 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import {
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface NewsItem {
   id: number;
@@ -22,26 +19,18 @@ export default function BreakingNewsSlider({ news }: Props) {
 
   if (!news.length) return null;
 
-  // Duplicate items for seamless infinite scrolling
   const scrollingNews = [...news, ...news];
 
   const scrollLeft = () => {
-    trackRef.current?.scrollBy({
-      left: -250,
-      behavior: "smooth",
-    });
+    trackRef.current?.scrollBy({ left: -250, behavior: "smooth" });
   };
 
   const scrollRight = () => {
-    trackRef.current?.scrollBy({
-      left: 250,
-      behavior: "smooth",
-    });
+    trackRef.current?.scrollBy({ left: 250, behavior: "smooth" });
   };
 
   return (
     <div className="relative overflow-hidden py-2">
-      {/* Left Chevron */}
       <button
         type="button"
         onClick={scrollLeft}
@@ -51,7 +40,6 @@ export default function BreakingNewsSlider({ news }: Props) {
         <ChevronLeft size={18} />
       </button>
 
-      {/* Right Chevron */}
       <button
         type="button"
         onClick={scrollRight}
@@ -61,19 +49,15 @@ export default function BreakingNewsSlider({ news }: Props) {
         <ChevronRight size={18} />
       </button>
 
-      {/* Scrolling area */}
-      <div
-        ref={trackRef}
-        className="breaking-news-scroll overflow-hidden"
-      >
-        <div className="breaking-news-track flex w-max items-center">
+      <div ref={trackRef} className="breaking-news-scroll overflow-hidden">
+        <div className="breaking-news-track flex w-max">
           {scrollingNews.map((item, index) => (
             <Link
               key={`${item.id}-${index}`}
               href={`/news/${item.slug}`}
               className="
                 flex
-                w-[180px]
+                w-[250px]
                 shrink-0
                 items-center
                 border-r
@@ -83,13 +67,15 @@ export default function BreakingNewsSlider({ news }: Props) {
                 text-white
                 hover:underline
                 md:w-[16.6667vw]
-                lg:w-[180px]
-                xl:w-[200px]
+                lg:w-[250px]
+                xl:w-[300px]
+                h-12
+                whitespace-normal
+                break-words
+                overflow-hidden
               "
             >
-              <span className="block truncate">
-                {item.title}
-              </span>
+              <span className="line-clamp-2">{item.title}</span>
             </Link>
           ))}
         </div>
@@ -108,7 +94,6 @@ export default function BreakingNewsSlider({ news }: Props) {
           0% {
             transform: translateX(0);
           }
-
           100% {
             transform: translateX(-50%);
           }
