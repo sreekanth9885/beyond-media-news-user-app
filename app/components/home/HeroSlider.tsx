@@ -61,34 +61,6 @@ export default function HeroSlider({ news }: Props) {
             MAIN HERO
         ========================== */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {news.length > 1 && (
-            <button
-              type="button"
-              onClick={previousHero}
-              aria-label="Previous hero news"
-              className="
-                absolute
-                left-5
-                top-1/2
-                z-20
-                flex
-                h-12
-                w-12
-                -translate-y-1/2
-                items-center
-                justify-center
-                rounded-full
-                bg-white
-                text-black
-                shadow-lg
-                transition
-                hover:scale-105
-                hover:bg-gray-100
-              "
-            >
-              <ChevronLeft size={28} />
-            </button>
-          )}
           {sideNews.map((item) => (
             <Link
               key={item.id}
@@ -178,19 +150,16 @@ export default function HeroSlider({ news }: Props) {
             {/* Content */}
             <div className="absolute bottom-0 left-0 right-0 p-6 text-white md:p-7">
 
-              {/* Category */}
               {hero.category_name && (
                 <span className="inline-block rounded-full bg-red-500 px-3 py-1 text-sm font-semibold">
                   {hero.category_name}
                 </span>
               )}
 
-              {/* Title */}
               <h1 className="mt-4 max-w-2xl text-2xl font-bold leading-tight md:text-4xl">
                 {hero.title}
               </h1>
 
-              {/* Date */}
               {hero.created_at && (
                 <div className="mt-4 flex items-center gap-2 text-sm text-white/90">
                   <span>By Admin User</span>
@@ -212,7 +181,71 @@ export default function HeroSlider({ news }: Props) {
             </div>
           </Link>
 
-          {/* Previous button */}
+          {/* =================================
+      MOBILE PREVIOUS BUTTON
+  ================================== */}
+          {news.length > 1 && (
+            <button
+              type="button"
+              onClick={previousHero}
+              aria-label="Previous hero news"
+              className="
+        absolute
+        left-2
+        top-1/2
+        z-30
+        flex
+        h-10
+        w-10
+        -translate-y-1/2
+        items-center
+        justify-center
+        rounded-full
+        bg-white/90
+        text-black
+        shadow-lg
+        transition
+        hover:bg-white
+        active:scale-95
+        lg:hidden
+      "
+            >
+              <ChevronLeft size={22} />
+            </button>
+          )}
+
+          {/* =================================
+      MOBILE NEXT BUTTON
+  ================================== */}
+          {news.length > 1 && (
+            <button
+              type="button"
+              onClick={nextHero}
+              aria-label="Next hero news"
+              className="
+        absolute
+        right-2
+        top-1/2
+        z-30
+        flex
+        h-10
+        w-10
+        -translate-y-1/2
+        items-center
+        justify-center
+        rounded-full
+        bg-white/90
+        text-black
+        shadow-lg
+        transition
+        hover:bg-white
+        active:scale-95
+        lg:hidden
+      "
+            >
+              <ChevronRight size={22} />
+            </button>
+          )}
 
         </div>
 
@@ -226,7 +259,39 @@ export default function HeroSlider({ news }: Props) {
       {/* =========================
           NEXT BUTTON
       ========================== */}
+      {/* =========================
+    DESKTOP PREVIOUS BUTTON
+========================= */}
 
+      {news.length > 1 && (
+        <button
+          type="button"
+          onClick={previousHero}
+          aria-label="Previous hero news"
+          className="
+      absolute
+      left-4
+      top-1/2
+      z-30
+      hidden
+      h-12
+      w-12
+      -translate-y-1/2
+      items-center
+      justify-center
+      rounded-full
+      bg-white
+      text-black
+      shadow-lg
+      transition
+      hover:scale-105
+      hover:bg-gray-100
+      lg:flex
+    "
+        >
+          <ChevronLeft size={28} />
+        </button>
+      )}
       {news.length > 1 && (
         <button
           type="button"
@@ -256,34 +321,6 @@ export default function HeroSlider({ news }: Props) {
           <ChevronRight size={28} />
         </button>
       )}
-
-      {/* Mobile next button */}
-      {news.length > 1 && (
-        <button
-          type="button"
-          onClick={nextHero}
-          aria-label="Next hero news"
-          className="
-            absolute
-            right-3
-            top-[200px]
-            z-30
-            flex
-            h-10
-            w-10
-            items-center
-            justify-center
-            rounded-full
-            bg-white
-            text-black
-            shadow-lg
-            lg:hidden
-          "
-        >
-          <ChevronRight size={22} />
-        </button>
-      )}
-
       {/* Counter */}
       {news.length > 1 && (
         <div className="absolute bottom-3 right-3 z-30 rounded-full bg-black/60 px-3 py-1 text-xs text-white">
