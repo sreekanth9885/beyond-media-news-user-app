@@ -6,6 +6,7 @@ import { Eye, Share2 } from "lucide-react";
 
 import { News } from "@/app/types/news";
 import { imageUrl } from "@/app/utils/image";
+import { clientConfig } from "@/app/config/client";
 
 // Helper to format date
 const formatDate = (date: string) => {
@@ -22,25 +23,20 @@ interface Props {
 
 export default function NewsCard({ news }: Props) {
   const handleShare = async () => {
-    const url = `${window.location.origin}/news/${news.slug}`;
+    const url = `${clientConfig.siteUrl}/news/${news.slug}`;
 
     try {
-      // Native mobile/browser share
-      if (navigator.share) {
-        await navigator.share({
-          title: news.title,
-          text: news.short_description || news.title,
-          url,
-        });
-        return;
-      }
+    if (navigator.share) {
+      await navigator.share({
+        url,
+      });
+      return;
+    }
 
-      // Fallback: copy URL
-      await navigator.clipboard.writeText(url);
+    await navigator.clipboard.writeText(url);
 
-      alert("News link copied!");
-    } catch (error) {
-      // User cancelled sharing - do nothing
+    alert("News link copied!");
+  } catch (error) {
       if ((error as Error).name !== "AbortError") {
         console.error("Share failed:", error);
       }

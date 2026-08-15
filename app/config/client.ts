@@ -1,7 +1,7 @@
 export const clientConfig = {
   siteName: "Beyond Media",
 
-  siteUrl: "https://beyondmedia.com",
+  siteUrl: "https://user.dinnusmart.com",
 
   logos: {
     topBar: "/topbar-logo.jpeg",

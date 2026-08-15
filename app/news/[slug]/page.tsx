@@ -7,11 +7,76 @@ import { imageUrl } from "@/app/utils/image";
 import LatestNews from "@/app/components/home/LatestNews";
 import AdvertisementInline from "@/app/components/advertisement/AdvertisementInline";
 import TrendingPage from "@/app/trending/page";
-
+import type { Metadata } from "next";
+import { clientConfig } from "@/app/config/client";
 interface Props {
   params: Promise<{ slug: string }>;
 }
+export async function generateMetadata({
+  params,
+}: Props): Promise<Metadata> {
+  const { slug } = await params;
 
+  const news = await getNewsBySlug(slug);
+
+  if (!news) {
+    return {
+      title: `News Not Found | ${clientConfig.siteName}`,
+    };
+  }
+
+  const title = news.title;
+
+  const description =
+    news.short_description?.trim() ||
+    news.title;
+
+  const url = `${clientConfig.siteUrl}/news/${news.slug}`;
+
+  const image = imageUrl(news.featured_image);
+
+  return {
+    metadataBase: new URL(clientConfig.siteUrl),
+
+    title,
+    description,
+
+    alternates: {
+      canonical: url,
+    },
+
+    openGraph: {
+      type: "article",
+      locale: "te_IN",
+
+      title,
+      description,
+      url,
+
+      siteName: clientConfig.siteName,
+
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+
+      ...(news.published_at && {
+        publishedTime: new Date(news.published_at).toISOString(),
+      }),
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+    },
+  };
+}
 export default async function NewsDetailsPage({ params }: Props) {
   const { slug } = await params;
 
