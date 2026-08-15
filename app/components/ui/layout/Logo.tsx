@@ -2,20 +2,26 @@ import Image from "next/image";
 import Link from "next/link";
 import { clientConfig } from "@/app/config/client";
 
-export default function Logo() {
+interface LogoProps {
+  type?: "topBar" | "navbar" | "footer";
+  width?: number;
+  height?: number;
+}
+
+export default function Logo({
+  type = "navbar",
+  width = 180,
+  height = 50,
+}: LogoProps) {
   return (
-    <Link href="/" className="flex items-center gap-3">
+    <Link href="/" className="flex items-center">
       <Image
-        src={clientConfig.logo}
+        src={clientConfig.logos[type]}
         alt={clientConfig.siteName}
-        width={180}
-        height={50}
+        width={width}
+        height={height}
         priority
       />
-
-      {/* <span className="hidden text-xl font-bold lg:block">
-        {clientConfig.siteName}
-      </span> */}
     </Link>
   );
 }

@@ -1,7 +1,5 @@
 import { format } from "date-fns";
 import Link from "next/link";
-import { MapPin } from "lucide-react";
-
 import Container from "./Container";
 import Logo from "./Logo";
 import SocialLinks from "./SocialLinks";
@@ -16,9 +14,13 @@ export default function TopBar() {
           {/* ----- LEFT: Logo + Brand Info (no Live Updates) ----- */}
           <div className="flex min-w-0 items-center gap-3 sm:gap-4 lg:gap-6">
             {/* Logo */}
-            <div className="shrink-0">
-              <div className="w-[110px] sm:w-[140px] lg:w-auto">
-                <Logo />
+            <div className="hidden shrink-0 lg:block">
+              <div className="w-auto">
+                <Logo
+                  type="topBar"
+                  width={160}
+                  height={80}
+                />
               </div>
             </div>
 

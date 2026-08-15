@@ -6,29 +6,36 @@ import { Category } from "@/app/types/category";
 interface Props {
   open: boolean;
   categories: Category[];
+  onClose: () => void;
 }
 
 export default function MobileMenu({
   open,
   categories,
+  onClose,
 }: Props) {
   if (!open) return null;
 
   return (
-    <div className="border-t border-border bg-background lg:hidden">
-      <div className="flex flex-col py-4">
+    <div className="fixed inset-x-0 top-16 z-40 border-b border-border bg-background shadow-lg lg:hidden">
+      <div className="max-h-[calc(100vh-4rem)] overflow-y-auto">
+
+        {/* Home */}
         <Link
           href="/"
-          className="px-6 py-3 hover:bg-surface"
+          onClick={onClose}
+          className="block border-b border-border px-6 py-4 text-base font-medium hover:bg-surface"
         >
           Home
         </Link>
 
+        {/* Categories */}
         {categories.map((category) => (
           <Link
             key={category.id}
             href={`/category/${category.slug}`}
-            className="px-6 py-3 hover:bg-surface"
+            onClick={onClose}
+            className="block border-b border-border px-6 py-4 text-base hover:bg-surface"
           >
             {category.name}
           </Link>

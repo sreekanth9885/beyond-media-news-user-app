@@ -3,13 +3,19 @@ export const clientConfig = {
 
   siteUrl: "https://beyondmedia.com",
 
-  logo: "/clogo.png",
+  logos: {
+    topBar: "/topbar-logo.jpeg",
+    navbar: "/navbar-logo.jpeg",
+    footer: "/footer-logo.png", // optional
+  },
 
   favicon: "/favicon.ico",
 
   email: "info@beyondmedia.com",
 
-  phone: "+91 9000000000",
+  contact: {
+    whatsapp: "919010079111",
+  },
 
   theme: {
     primary: "#E11D48",
