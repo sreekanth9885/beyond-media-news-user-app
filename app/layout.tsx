@@ -6,6 +6,7 @@ import ThemeProvider from "./theme/ThemeProvider";
 
 import SiteHeader from "./components/navigation/SiteHeader";
 import Footer from "./components/ui/layout/Footer";
+import { clientConfig } from "./config/client";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,8 +19,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Beyond I Media News",
-  description: "Latest Telugu & English News",
+  title: {
+    default: clientConfig.siteName,
+    template: `%s | ${clientConfig.siteName}`,
+  },
+
+  description: clientConfig.seo.description,
+
+  keywords: clientConfig.seo.keywords,
+
+  icons: {
+    icon: "/navbar-logo.jpeg",
+    shortcut: "/navbar-logo.jpeg",
+    apple: "/navbar-logo.jpeg",
+  },
+
+  metadataBase: new URL(clientConfig.siteUrl),
 };
 
 export default function RootLayout({

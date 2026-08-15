@@ -1,5 +1,5 @@
 export const clientConfig = {
-  siteName: "Beyond Media",
+  siteName: "Beyond I Media News",
 
   siteUrl: "https://user.dinnusmart.com",
 
@@ -9,7 +9,7 @@ export const clientConfig = {
     footer: "/footer-logo.png", // optional
   },
 
-  favicon: "/favicon.ico",
+  // favicon: "/favicon.ico",
 
   email: "info@beyondmedia.com",
 
