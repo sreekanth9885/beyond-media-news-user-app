@@ -9,71 +9,103 @@ import AdvertisementInline from "@/app/components/advertisement/AdvertisementInl
 import TrendingPage from "@/app/trending/page";
 import type { Metadata } from "next";
 import { clientConfig } from "@/app/config/client";
+import NewsArticleSchema from "@/app/components/seo/NewsArticleSchema";
 interface Props {
   params: Promise<{ slug: string }>;
 }
-export async function generateMetadata({
-  params,
-}: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
 
   const news = await getNewsBySlug(slug);
 
   if (!news) {
     return {
-      title: `News Not Found | ${clientConfig.siteName}`,
+      title: "News Not Found",
+      description: "The requested news article could not be found.",
+      robots: {
+        index: false,
+        follow: false,
+      },
     };
   }
 
   const title = news.title;
 
-  const description =
-    news.short_description?.trim() ||
-    news.title;
+  const description = news.short_description?.trim() || news.title;
 
   const url = `${clientConfig.siteUrl}/news/${news.slug}`;
 
   const image = imageUrl(news.featured_image);
 
   return {
-    metadataBase: new URL(clientConfig.siteUrl),
-
     title,
+
     description,
+
+    keywords: [
+      news.category_name,
+      "Telugu News",
+      "Breaking News",
+      "Latest News",
+      news.title,
+    ].filter(Boolean),
 
     alternates: {
       canonical: url,
     },
 
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
+
     openGraph: {
       type: "article",
-      locale: "te_IN",
 
       title,
+
       description,
+
       url,
 
       siteName: clientConfig.siteName,
+
+      locale: "en_IN",
 
       images: [
         {
           url: image,
           width: 1200,
           height: 630,
-          alt: title,
+          alt: news.title,
         },
       ],
 
       ...(news.published_at && {
-        publishedTime: new Date(news.published_at).toISOString(),
+        publishedTime: news.published_at,
       }),
     },
 
     twitter: {
       card: "summary_large_image",
+
       title,
+
       description,
-      images: [image],
+
+      images: [
+        {
+          url: image,
+          alt: news.title,
+        },
+      ],
     },
   };
 }
@@ -122,6 +154,7 @@ export default async function NewsDetailsPage({ params }: Props) {
         {/* MAIN ARTICLE */}
         {/* ================================= */}
         <article className="min-w-0">
+          <NewsArticleSchema news={news} />
           {/* News Top Advertisement */}
           {home.advertisements.news_top?.[0] && (
             <div className="mb-8">

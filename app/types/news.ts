@@ -17,7 +17,7 @@ export interface News {
   youtube_url: string;
 
   tags: string;
-
+  created_by_name: string;
   status: "draft" | "published";
 
   created_at: string;

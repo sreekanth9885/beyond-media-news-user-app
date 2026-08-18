@@ -19,8 +19,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(clientConfig.siteUrl),
+
   title: {
-    default: clientConfig.siteName,
+    default: clientConfig.seo.title,
     template: `%s | ${clientConfig.siteName}`,
   },
 
@@ -28,13 +30,43 @@ export const metadata: Metadata = {
 
   keywords: clientConfig.seo.keywords,
 
+  applicationName: clientConfig.siteName,
+
+  authors: [
+    {
+      name: clientConfig.siteName,
+    },
+  ],
+
+  creator: clientConfig.siteName,
+  publisher: clientConfig.siteName,
+  verification: {
+    google: "80CJruEWjiTeKujRK_o9A4H23XnrCEkhOKkPC_1HFeg",
+  },
+  alternates: {
+    canonical: "/",
+  },
+
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: clientConfig.siteUrl,
+    siteName: clientConfig.siteName,
+    title: clientConfig.seo.title,
+    description: clientConfig.seo.description,
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: clientConfig.seo.title,
+    description: clientConfig.seo.description,
+  },
+
   icons: {
     icon: "/navbar-logo.jpeg",
     shortcut: "/navbar-logo.jpeg",
     apple: "/navbar-logo.jpeg",
   },
-
-  metadataBase: new URL(clientConfig.siteUrl),
 };
 
 export default function RootLayout({

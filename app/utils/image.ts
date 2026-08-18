@@ -1,11 +1,19 @@
+import { clientConfig } from "../config/client";
+
 export function imageUrl(path?: string) {
   if (!path) {
-    return "/placeholder.jpg";
+    return `${clientConfig.siteUrl}/placeholder.jpg`;
   }
 
-  if (path.startsWith("http")) {
+  if (path.startsWith("http://") || path.startsWith("https://")) {
     return path;
   }
 
-  return `${process.env.NEXT_PUBLIC_IMAGE_URL}${path}`;
+  const base = process.env.NEXT_PUBLIC_IMAGE_URL;
+
+  if (!base) {
+    return `${clientConfig.siteUrl}/placeholder.jpg`;
+  }
+
+  return `${base.replace(/\/$/, "")}/${path.replace(/^\//, "")}`;
 }

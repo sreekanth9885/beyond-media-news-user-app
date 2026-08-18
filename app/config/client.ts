@@ -48,9 +48,18 @@ export const clientConfig = {
   },
 
   seo: {
-    title: "Beyond Media",
+    title: "Beyond I Media",
     description:
       "Latest Telugu News, Breaking News, Politics, Business, Sports and Entertainment.",
-    keywords: ["News", "Telugu News", "Breaking News", "Politics", "Sports"],
+    keywords: [
+      "Telugu News",
+      "Latest Telugu News",
+      "Breaking News",
+      "Telangana News",
+      "Politics",
+      "Sports",
+      "Entertainment",
+      "Business News",
+    ],
   },
 };
