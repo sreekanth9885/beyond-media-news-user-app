@@ -43,9 +43,10 @@ export default function Navbar({ categories }: Props) {
 
               {/* WhatsApp */}
               <a
-                href={`https://wa.me/${clientConfig.contact.whatsapp}`}
+                href={clientConfig.contact.whatsappChannel}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Follow us on WhatsApp"
               >
                 <FaWhatsapp className="text-[#25D366] text-3xl" />
               </a>

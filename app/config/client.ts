@@ -1,3 +1,5 @@
+import { blueTheme, redTheme } from "../theme";
+
 export const clientConfig = {
   siteName: "Beyond I Media News",
 
@@ -6,39 +8,18 @@ export const clientConfig = {
   logos: {
     topBar: "/topbar-logo.jpeg",
     navbar: "/navbar-logo.jpeg",
-    footer: "/footer-logo.png", // optional
+    footer: "/footer-logo.png",
   },
-
-  // favicon: "/favicon.ico",
 
   email: "info@beyondmedia.com",
 
   contact: {
     whatsapp: "919010079111",
+    whatsappChannel: "https://whatsapp.com/channel/0029Vb8RVrI9hXFCUpN3uS0c",
   },
 
-  theme: {
-    primary: "#E11D48",
-    primaryHover: "#BE123C",
-
-    secondary: "#1E293B",
-
-    background: "#F8FAFC",
-
-    surface: "#FFFFFF",
-
-    text: "#0F172A",
-
-    textMuted: "#64748B",
-
-    border: "#E2E8F0",
-
-    success: "#16A34A",
-
-    warning: "#F59E0B",
-
-    danger: "#DC2626",
-  },
+  // Change this to redTheme or greenTheme when needed
+  theme: redTheme,
 
   social: {
     facebook: "",
@@ -51,6 +32,7 @@ export const clientConfig = {
     title: "Beyond I Media",
     description:
       "Latest Telugu News, Breaking News, Politics, Business, Sports and Entertainment.",
+
     keywords: [
       "Telugu News",
       "Latest Telugu News",
