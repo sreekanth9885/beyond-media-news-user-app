@@ -5,7 +5,7 @@ export default async function TrendingPage() {
   const news = await getTrendingNews();
 
   return (
-    <main className="mx-auto max-w-screen-xl px-5 py-10">
+    <main className="mx-auto py-5">
       <LatestNews news={news} title="Trending News" />
     </main>
   );

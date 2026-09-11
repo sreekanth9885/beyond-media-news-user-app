@@ -223,11 +223,11 @@ export default async function NewsDetailsPage({ params }: Props) {
               <p className="text-sm text-muted-foreground">
                 Posted by{" "}
                 <span className="font-medium">{news.created_by_name}</span>
-                {news.created_by_email && (
+                {/* {news.created_by_email && (
                   <span className="ml-1 text-muted-foreground">
                     ({news.created_by_email})
                   </span>
-                )}
+                )} */}
                 {news.created_by_roles && (
                   <span className="ml-2 text-xs text-muted-foreground">
                     · {news.created_by_roles}
