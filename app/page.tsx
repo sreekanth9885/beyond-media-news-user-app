@@ -15,9 +15,11 @@ export default async function Home() {
   const rightAdvertisements = home.advertisements.homepage_right ?? [];
 
   return (
+    <>
+      <BreakingNews news={home.breaking} />
     <main className="mx-auto max-w-[1600px] px-5 py-10">
       {/* Breaking News */}
-      <BreakingNews news={home.breaking} />
+
 
       {/* 3 COLUMN LAYOUT */}
       <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-[250px_minmax(0,1fr)_250px]">
@@ -85,5 +87,7 @@ export default async function Home() {
         </aside>
       </div>
     </main>
+    </>
+
   );
 }

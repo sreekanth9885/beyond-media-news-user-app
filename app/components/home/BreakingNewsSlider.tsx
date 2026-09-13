@@ -56,26 +56,21 @@ export default function BreakingNewsSlider({ news }: Props) {
               key={`${item.id}-${index}`}
               href={`/news/${item.slug}`}
               className="
-                flex
-                w-[250px]
-                shrink-0
-                items-center
-                border-r
-                border-white/25
-                px-4
-                text-sm
-                text-white
-                hover:underline
-                md:w-[16.6667vw]
-                lg:w-[250px]
-                xl:w-[300px]
-                h-12
-                whitespace-normal
-                break-words
-                overflow-hidden
-              "
+  flex
+  w-max
+  shrink-0
+  items-center
+  border-r
+  border-white/25
+  px-6
+  text-sm
+  text-white
+  hover:underline
+  h-12
+  whitespace-nowrap
+"
             >
-              <span className="line-clamp-2">{item.title}</span>
+              <span>{item.title}</span>
             </Link>
           ))}
         </div>

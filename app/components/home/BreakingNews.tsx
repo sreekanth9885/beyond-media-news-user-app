@@ -13,7 +13,7 @@ export default function BreakingNews({ news }: Props) {
   if (!news.length) return null;
 
   return (
-    <div className="border-y bg-red-600 text-white">
+    <div className="border-y bg-red-600 text-white w-full">
       <Container>
         <BreakingNewsSlider news={news} />
       </Container>
