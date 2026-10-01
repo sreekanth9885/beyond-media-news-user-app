@@ -1,6 +1,6 @@
 services:
   news:
-    build: 
+    build:
       context: .
       args:
         NEXT_PUBLIC_API_URL: https://api.dinnusmart.com/api
@@ -13,7 +13,7 @@ services:
     labels:
       - "traefik.enable=true"
 
-      - "traefik.http.routers.news.rule=Host(`user.dinnusmart.com`)"
+      - "traefik.http.routers.news.rule=Host(`beyondpolitics.in`)"
 
       - "traefik.http.routers.news.entrypoints=websecure"
 
