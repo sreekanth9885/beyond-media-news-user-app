@@ -61,3 +61,90 @@ body {
   color: var(--text);
   font-family: Arial, Helvetica, sans-serif;
 }
+/* =========================================================
+   GOOGLE TRANSLATE
+   ========================================================= */
+
+/*
+ * Hide Google Translate widget itself.
+ * Keep it in the DOM because Google needs the element.
+ */
+.google-translate-hidden {
+  position: absolute !important;
+  left: -99999px !important;
+  top: -99999px !important;
+
+  width: 1px !important;
+  height: 1px !important;
+
+  overflow: hidden !important;
+  opacity: 0 !important;
+
+  pointer-events: none !important;
+}
+
+/*
+ * Hide Google branding text.
+ */
+.goog-te-gadget {
+  font-size: 0 !important;
+  font-family: inherit !important;
+}
+
+/*
+ * Hide Google's top translation banner.
+ */
+.goog-te-banner-frame,
+iframe.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+  visibility: hidden !important;
+
+  width: 0 !important;
+  height: 0 !important;
+
+  max-height: 0 !important;
+}
+
+/*
+ * Google sometimes creates a wrapper around
+ * the banner iframe.
+ */
+body > .skiptranslate {
+  display: none !important;
+  visibility: hidden !important;
+
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/*
+ * Google modifies body position when translation
+ * starts. Force it back.
+ */
+html {
+  margin-top: 0 !important;
+  top: 0 !important;
+}
+
+body {
+  margin-top: 0 !important;
+  top: 0 !important;
+}
+
+/*
+ * Google translation tooltip.
+ */
+#goog-gt-tt,
+.goog-tooltip {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/*
+ * Remove Google text highlighting.
+ */
+.goog-text-highlight {
+  background: transparent !important;
+  box-shadow: none !important;
+}

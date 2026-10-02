@@ -79,6 +79,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       style={
         {
@@ -86,13 +87,13 @@ export default function RootLayout({
           "--primary-hover": theme.primaryHover,
           "--secondary": theme.secondary,
 
-          "--background": theme.background,
-          "--surface": theme.surface,
+      "--background": theme.background,
+      "--surface": theme.surface,
 
-          "--text": theme.text,
-          "--text-muted": theme.textMuted,
+      "--text": theme.text,
+      "--text-muted": theme.textMuted,
 
-          "--border": theme.border,
+      "--border": theme.border,
 
           "--success": theme.success,
           "--warning": theme.warning,
@@ -102,9 +103,7 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-background text-text">
         <SiteHeader />
-
         {children}
-
         <Footer />
       </body>
     </html>
