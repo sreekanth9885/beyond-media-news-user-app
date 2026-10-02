@@ -155,7 +155,7 @@ export default function GoogleTranslate() {
                       : "text-text hover:bg-primary/10"
                       }`}
               >
-                  EN
+                  English
               </button>
 
               <button
