@@ -7,6 +7,7 @@ import MenuToggle from "./MenuToggle";
 import MobileMenu from "./MobileMenu";
 import Container from "../ui/layout/Container";
 import Logo from "../ui/layout/Logo";
+import GoogleTranslate from "../language/GoogleTranslate";
 import { FaWhatsapp } from "react-icons/fa";
 import { clientConfig } from "@/app/config/client";
 
@@ -38,8 +39,11 @@ export default function Navbar({ categories }: Props) {
               <DesktopMenu categories={categories} />
             </div>
 
-            {/* RIGHT - WHATSAPP + MENU */}
+            {/* RIGHT - LANGUAGE + WHATSAPP + MENU */}
             <div className="flex items-center gap-2">
+
+              {/* Language Selector */}
+              <GoogleTranslate />
 
               {/* WhatsApp */}
               <a
@@ -47,8 +51,9 @@ export default function Navbar({ categories }: Props) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Follow us on WhatsApp"
+                className="shrink-0"
               >
-                <FaWhatsapp className="text-[#25D366] text-3xl" />
+                <FaWhatsapp className="text-3xl text-[#25D366]" />
               </a>
 
               {/* Mobile Menu */}
@@ -56,7 +61,6 @@ export default function Navbar({ categories }: Props) {
                 open={open}
                 onClick={() => setOpen((prev) => !prev)}
               />
-
             </div>
           </div>
         </Container>

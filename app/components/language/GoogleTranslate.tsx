@@ -146,31 +146,29 @@ export default function GoogleTranslate() {
       />
 
       {/* Our own language selector */}
-      <div className="flex items-center gap-1 rounded-lg border border-border bg-background p-1">
-        <button
-          type="button"
-          onClick={() => changeLanguage("en")}
-          className={`rounded-md px-3 py-1.5 text-sm font-medium transition ${
-            currentLanguage === "en"
-              ? "bg-primary text-white"
-              : "text-text hover:bg-primary/10"
-          }`}
-        >
-          English
-        </button>
+          <div className="flex shrink-0 items-center gap-1 rounded-lg border border-border bg-background p-1">
+              <button
+                  type="button"
+                  onClick={() => changeLanguage("en")}
+                  className={`rounded-md px-2 py-1 text-xs font-medium transition sm:px-3 sm:py-1.5 sm:text-sm ${currentLanguage === "en"
+                      ? "bg-primary text-white"
+                      : "text-text hover:bg-primary/10"
+                      }`}
+              >
+                  EN
+              </button>
 
-        <button
-          type="button"
-          onClick={() => changeLanguage("te")}
-          className={`rounded-md px-3 py-1.5 text-sm font-medium transition ${
-            currentLanguage === "te"
-              ? "bg-primary text-white"
-              : "text-text hover:bg-primary/10"
-          }`}
-        >
-          తెలుగు
-        </button>
-      </div>
+              <button
+                  type="button"
+                  onClick={() => changeLanguage("te")}
+                  className={`rounded-md px-2 py-1 text-xs font-medium transition sm:px-3 sm:py-1.5 sm:text-sm ${currentLanguage === "te"
+                      ? "bg-primary text-white"
+                      : "text-text hover:bg-primary/10"
+                      }`}
+              >
+                  తెలుగు
+              </button>
+          </div>
     </>
   );
 }
