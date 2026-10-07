@@ -193,7 +193,15 @@ export default async function NewsDetailsPage({ params }: Props) {
           )}
 
           {/* Article Content */}
-          <div className="prose mt-8 max-w-none">{news.content}</div>
+          <div className="prose mt-8 max-w-none">
+            {news.content
+              ?.split(/\r?\n\s*\r?\n/)
+              .map((paragraph: any, index: any) => (
+                <p key={index} className="mb-5 leading-8">
+                  {paragraph.trim()}
+                </p>
+              ))}
+          </div>
 
           {/* YouTube Button */}
           {news.youtube_url && (
